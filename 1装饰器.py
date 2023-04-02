@@ -1,14 +1,20 @@
+import inspect
 
 
-def log(level):
-    def wrapper(func):
-        def inwrapper(*args, **kwargs):
-            print(f"[DEBUG] [{level}]: run {func.__name__}")
-            return func(*args, **kwargs)
-        return inwrapper
-    return wrapper
+def debug():
+    call_name = inspect.stack()[1][3]
+    print("[DEBUG]:enter {}()".format(call_name))
 
 
+def say_hello():
+    debug()
+    print("hello")
 
-def say(message):
-    print(f"说了：{message}")
+
+def say_goodbye():
+    debug()
+    print("goodbye")
+
+if __name__ == '__main__':
+    say_hello()
+    say_goodbye()
